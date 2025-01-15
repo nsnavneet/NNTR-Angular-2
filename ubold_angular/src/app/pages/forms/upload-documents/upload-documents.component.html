@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <div class="row align-items-center mb-4">
+        <div class="col-12">
+            <div class="page-title-box rounded p-3">
+                <h4 class="page-title mb-0" style="color: white;">Upload Documents</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form [formGroup]="uploadDocumentsForm" (ngSubmit)="onSubmit()">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="formType" class="form-label">Form Type</label>
+                                <select class="form-select" id="formType" formControlName="formType">
+                                    <option value="">Select Form Type</option>
+                                    <option value="type1">Type 1</option>
+                                    <option value="type2">Type 2</option>
+                                    <option value="type3">Type 3</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date" formControlName="date">
+                            </div>
+                            <div class="col-4">
+                                <label for="time" class="form-label">Time</label>
+                                <input type="time" class="form-control" id="time" formControlName="time">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 align-items-end">
+                            <div class="col-4">
+                                <label for="file" class="form-label">Choose File</label>
+                                <input type="file" class="form-control" id="file" formControlName="file">
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Upload Documents Table -->
+                    <h4 class="mt-4">Upload Documents</h4>
+                    <div class="table-responsive">
+                        <table class="table table-centered table-nowrap mb-0">
+                            <thead>
+                                <tr>
+                                    <th>S.No.</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                    <th>Uploaded By</th>
+                                    <th>Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- You can use *ngFor here to iterate over your data -->
+                                <tr>
+                                    <td>1</td>
+                                    <td>Sample Type</td>
+                                    <td>2023-05-20</td>
+                                    <td>John Doe</td>
+                                    <td>
+                                        <img src="path_to_image" alt="Uploaded Image" class="img-fluid" style="max-width: 50px;">
+                                    </td>
+                                </tr>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

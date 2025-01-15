@@ -1,0 +1,212 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box rounded mb-4 p-3">
+                <h4 class="page-title mb-0"style="color: white;">Treatment Plan</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form [formGroup]="treatmentPlanForm" (ngSubmit)="onSubmit()">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="date" class="form-label fw-bold">Date</label>
+                                <input type="date" id="date" formControlName="date" class="form-control form-control-lg">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="remarks" class="form-label fw-bold">Remarks</label>
+                                <textarea id="remarks" formControlName="remarks" class="form-control form-control-lg" rows="1"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="selectTreatment" class="form-label fw-bold">Select Treatment</label>
+                            <select id="selectTreatment" formControlName="selectTreatment" class="form-select form-select-lg">
+                                <option value="">Choose an option</option>
+                                <option value="radiationTherapy">Radiation Therapy</option>
+                                <option value="chemotherapy">Chemotherapy</option>
+                                <option value="surgery">Surgery</option>
+                            </select>
+                        </div>
+
+                        <!-- Radiation Therapy Section -->
+                        <div *ngIf="treatmentPlanForm.get('selectTreatment')?.value === 'radiationTherapy'" class="bg-light p-4 rounded shadow-sm mb-4">
+                            <h5 class="text-primary mb-3">Radiation Therapy Details</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="radiationDate" class="form-label">Date</label>
+                                    <input type="date" id="radiationDate" formControlName="radiationDate" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="radiationDose" class="form-label">Dose (GY)</label>
+                                    <input type="number" id="radiationDose" formControlName="radiationDose" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="radiationDuration" class="form-label">Duration</label>
+                                    <input type="text" id="radiationDuration" formControlName="radiationDuration" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="radiationModality" class="form-label">Modality</label>
+                                    <select id="radiationModality" formControlName="radiationModality" class="form-select">
+                                        <option value="">Choose an option</option>
+                                        <option value="option1">Option 1</option>
+                                        <option value="option2">Option 2</option>
+                                        <option value="option3">Option 3</option>
+                                        <option value="option4">Option 4</option>
+                                        <option value="option5">Option 5</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="radiationSelect" class="form-label">Select</label>
+                                    <select id="radiationSelect" formControlName="radiationSelect" class="form-select">
+                                        <option value="">Choose an option</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button type="button" class="btn btn-primary" (click)="saveRadiationTherapy()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chemotherapy Section -->
+                        <div *ngIf="treatmentPlanForm.get('selectTreatment')?.value === 'chemotherapy'" class="bg-light p-4 rounded shadow-sm mb-4">
+                            <h5 class="text-primary mb-3">Chemotherapy Details</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="cyclesPlanned" class="form-label">Cycles Planned</label>
+                                    <div class="input-group">
+                                        <button class="btn btn-outline-secondary" type="button" (click)="decrementCycles('planned')">-</button>
+                                        <input type="text" id="cyclesPlanned" [value]="getCyclesValue('planned')" readonly class="form-control text-center">
+                                        <button class="btn btn-outline-secondary" type="button" (click)="incrementCycles('planned')">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="cyclesGiven" class="form-label">Cycles Given</label>
+                                    <div class="input-group">
+                                        <button class="btn btn-outline-secondary" type="button" (click)="decrementCycles('given')">-</button>
+                                        <input type="text" id="cyclesGiven" [value]="getCyclesValue('given')" readonly class="form-control text-center">
+                                        <button class="btn btn-outline-secondary" type="button" (click)="incrementCycles('given')">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <h5>Cycle 1</h5>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="chemoDate" class="form-label">Date</label>
+                                    <input type="date" id="chemoDate" formControlName="chemoDate" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="chemoRegime" class="form-label">Regime</label>
+                                    <input type="text" id="chemoRegime" formControlName="chemoRegime" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="chemoStatus" class="form-label">Status</label>
+                                    <select id="chemoStatus" formControlName="chemoStatus" class="form-select">
+                                        <option value="">Choose an option</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="ongoing">Ongoing</option>
+                                        <option value="cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button type="button" class="btn btn-primary" (click)="saveChemotherapy()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Surgery Section -->
+                        <div *ngIf="treatmentPlanForm.get('selectTreatment')?.value === 'surgery'" class="bg-light p-4 rounded shadow-sm mb-4">
+                            <h5 class="text-primary mb-3">Surgery Details</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="surgeryDate" class="form-label">Date</label>
+                                    <input type="date" id="surgeryDate" formControlName="surgeryDate" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="surgeryTime" class="form-label">Time</label>
+                                    <input type="time" id="surgeryTime" formControlName="surgeryTime" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="surgeryGross" class="form-label">Gross</label>
+                                    <select id="surgeryGross" formControlName="surgeryGross" class="form-select">
+                                        <option value="">Choose an option</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="surgeryName" class="form-label">Name of Surgery</label>
+                                    <input type="text" id="surgeryName" formControlName="surgeryName" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="operativeFindings" class="form-label">Operative Findings</label>
+                                    <input type="text" id="operativeFindings" formControlName="operativeFindings" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="extentOfExcision" class="form-label">Extent of Excision</label>
+                                    <input type="text" id="extentOfExcision" formControlName="extentOfExcision" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button type="button" class="btn btn-primary" (click)="saveSurgery()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="radiations" class="form-label fw-bold">Radiations</label>
+                            <textarea id="radiations" formControlName="radiations" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="chemotherapies" class="form-label fw-bold">Chemotherapies</label>
+                            <textarea id="chemotherapies" formControlName="chemotherapies" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="surgeries" class="form-label fw-bold">Surgeries</label>
+                            <textarea id="surgeries" formControlName="surgeries" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-sm px-2">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

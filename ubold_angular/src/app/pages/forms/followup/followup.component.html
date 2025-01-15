@@ -1,0 +1,127 @@
+<div class="container-fluid">
+    <div class="row align-items-center mb-4">
+        <div class="col-12">
+            <div class="page-title-box rounded p-3">
+                <h4 class="page-title mb-0" style="color: white;">Follow-up</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instant Followup section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Instant Followup</h4>
+                    <form [formGroup]="instantFollowupForm" (ngSubmit)="onInstantFollowupSubmit()">
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="date" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="date" formControlName="date">
+                            </div>
+                            <div class="col-6">
+                                <label for="time" class="form-label">Time</label>
+                                <input type="time" class="form-control" id="time" formControlName="time">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="comment" class="form-label">Comment</label>
+                            <textarea class="form-control" id="comment" rows="3" formControlName="comment"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Radiological Followup section -->
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Radiological Followup</h4>
+                    <form [formGroup]="radiologicalFollowupForm" (ngSubmit)="onRadiologicalFollowupSubmit()">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="radioDate" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="radioDate" formControlName="date">
+                            </div>
+                            <div class="col-4">
+                                <label for="radioTime" class="form-label">Time</label>
+                                <input type="time" class="form-control" id="radioTime" formControlName="time">
+                            </div>
+                            <div class="col-4">
+                                <label for="cancerTreatment" class="form-label">Cancer Treatment</label>
+                                <select class="form-select" id="cancerTreatment" formControlName="cancerTreatment">
+                                    <option value="">Select Treatment</option>
+                                    <option value="chemotherapy">Chemotherapy</option>
+                                    <option value="radiationTherapy">Radiation Therapy</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clinical Followup section -->
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Clinical Followup</h4>
+                    <form [formGroup]="clinicalFollowupForm" (ngSubmit)="onClinicalFollowupSubmit()">
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="clinicalDate" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="clinicalDate" formControlName="date">
+                            </div>
+                            <div class="col-4">
+                                <label for="clinicalTime" class="form-label">Time</label>
+                                <input type="time" class="form-control" id="clinicalTime" formControlName="time">
+                            </div>
+                            <div class="col-4">
+                                <label for="clinicalStatus" class="form-label">Status</label>
+                                <select class="form-select" id="clinicalStatus" formControlName="status">
+                                    <option value="">Select Status</option>
+                                    <option value="complete_response">Complete Response</option>
+                                    <option value="partial_response">Partial Response</option>
+                                    <option value="progressive">Progressive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label class="form-label">Dimensions</label>
+                                <div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="dimensionsKnown" value="known" formControlName="dimensions">
+                                        <label class="form-check-label" for="dimensionsKnown">Known</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="dimensionsNotKnown" value="not-known" formControlName="dimensions">
+                                        <label class="form-check-label" for="dimensionsNotKnown">Not Known</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clinicalComment" class="form-label">Comment</label>
+                            <textarea class="form-control" id="clinicalComment" rows="3" formControlName="comment"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

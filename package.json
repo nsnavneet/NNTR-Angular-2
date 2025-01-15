@@ -1,0 +1,16 @@
+{
+  "name": "ubold_angular_v1.2.0",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cd ubold_angular && ng serve",
+    "build": "cd ubold_angular && ng build",
+    "test": "cd ubold_angular && ng test"
+  },
+  "dependencies": {
+    "@angular/core": "^18.2.8",
+    "@angular/forms": "^18.2.8",
+    "@angular/platform-browser": "^18.2.8",
+    "@angular/platform-browser-dynamic": "^18.2.8",
+    "express": "^4.17.1"
+  }
+}

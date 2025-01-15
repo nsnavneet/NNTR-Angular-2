@@ -1,0 +1,128 @@
+// Variables for the color scheme
+$primary-color: #3a5a78;  // A muted blue-gray
+$secondary-color: #f0f4f8; // A very light blue-gray
+$accent-color: #718096;   // A medium gray with a hint of blue
+$text-color: #2d3748;     // A dark gray for text
+$border-color: #e2e8f0;   // A light gray for borders
+
+.card {
+  border: none;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.form-control, .form-select {
+  border: 1px solid $border-color;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: $text-color;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+  }
+}
+
+.btn-primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  color: #ffffff;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.bg-light {
+  background-color: $secondary-color !important;
+}
+
+.text-primary {
+  color: $primary-color !important;
+}
+
+.fw-bold {
+  font-weight: 600 !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+}
+
+.shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important;
+}
+
+.page-title-box {
+  background-color: $primary-color;
+  color: #ffffff;
+  border-left: 4px solid darken($primary-color, 10%);
+  padding: 1rem;
+  border-radius: 0.25rem;
+
+  .input-group {
+    .form-control {
+      border-color: #ffffff;
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.1);
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .btn-outline-light {
+      color: #ffffff;
+      border-color: #ffffff;
+
+      &:hover {
+        background-color: #ffffff;
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.page-title {
+  margin: 0;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+label {
+  color: $accent-color;
+  font-weight: 500;
+}
+
+h5 {
+  color: $primary-color;
+  border-bottom: 2px solid $border-color;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-group-text {
+  background-color: $secondary-color;
+  border-color: $border-color;
+  color: $accent-color;
+}
+
+.form-select-lg {
+  height: 48px; // Adjust this value to match your select height
+}
+
+.custom-btn {
+  height: 48px; // Same height as form-select-lg
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}

@@ -1,0 +1,138 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box rounded mb-4 p-3">
+                <h4 class="page-title mb-0" style="color: white;">Initial Fundus Examination</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form [formGroup]="fundusForm">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="patientUHID" class="form-label fw-bold">Patient UHID *</label>
+                                <div class="input-group">
+                                    <input type="text" id="patientUHID" formControlName="patientUHID" class="form-control form-control-lg" required>
+                                    <button class="btn btn-outline-secondary" type="button" (click)="searchPatient('initial')">
+                                        <i class="mdi mdi-magnify"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="date" class="form-label fw-bold">Date</label>
+                                <input type="date" id="date" formControlName="date" class="form-control form-control-lg">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="preOpLeft" class="form-label fw-bold">Pre-Op (Left Eye)</label>
+                                <select id="preOpLeft" formControlName="preOpLeft" class="form-select form-select-lg">
+                                    <option value="">Choose an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="preOpRight" class="form-label fw-bold">Pre-Op (Right Eye)</label>
+                                <select id="preOpRight" formControlName="preOpRight" class="form-select form-select-lg">
+                                    <option value="">Choose an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="imageLeft" class="form-label fw-bold">Upload Image (Left Eye)</label>
+                                <input type="file" id="imageLeft" (change)="onFileSelected($event, 'left')" class="form-control form-control-lg">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="imageRight" class="form-label fw-bold">Upload Image (Right Eye)</label>
+                                <input type="file" id="imageRight" (change)="onFileSelected($event, 'right')" class="form-control form-control-lg">
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary btn-sm px-2" (click)="uploadImages()">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Fundus Examination section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="page-title-box rounded mb-4 p-3">
+                <h4 class="page-title mb-0" style="color: white;">Final Fundus Examination</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form [formGroup]="finalFundusForm">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="finalPatientUHID" class="form-label fw-bold">Patient UHID *</label>
+                                <div class="input-group">
+                                    <input type="text" id="finalPatientUHID" formControlName="finalPatientUHID" class="form-control form-control-lg" required>
+                                    <button class="btn btn-outline-secondary" type="button" (click)="searchPatient('final')">
+                                        <i class="mdi mdi-magnify"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="finalDate" class="form-label fw-bold">Date</label>
+                                <input type="date" id="finalDate" formControlName="finalDate" class="form-control form-control-lg">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="finalPreOpLeft" class="form-label fw-bold">Pre-Op (Left Eye)</label>
+                                <select id="finalPreOpLeft" formControlName="finalPreOpLeft" class="form-select form-select-lg">
+                                    <option value="">Choose an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="finalPreOpRight" class="form-label fw-bold">Pre-Op (Right Eye)</label>
+                                <select id="finalPreOpRight" formControlName="finalPreOpRight" class="form-select form-select-lg">
+                                    <option value="">Choose an option</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="finalImageLeft" class="form-label fw-bold">Upload Image (Left Eye)</label>
+                                <input type="file" id="finalImageLeft" (change)="onFinalFileSelected($event, 'left')" class="form-control form-control-lg">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="finalImageRight" class="form-label fw-bold">Upload Image (Right Eye)</label>
+                                <input type="file" id="finalImageRight" (change)="onFinalFileSelected($event, 'right')" class="form-control form-control-lg">
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary btn-sm px-2" (click)="uploadFinalImages()">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,329 @@
+<!-- page title -->
+
+<div class="container-fluid">
+    <div class="row align-items-center mb-4">
+        <div class="col-12">
+            <div class="page-title-box rounded p-3">
+                <h4 class="page-title mb-0" style="color: white;">Patient Registration</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Patient Details</h4>
+                    <p class="sub-header"></p>
+
+                    <form>
+                        <!-- UHID Row -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="uhid" class="form-label">UHID <span style="color: red;">*</span></label>
+                                <div class="input-group">
+                                    <input type="text" id="uhid" class="form-control" required maxlength="9">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-8"></div> <!-- This keeps the rest of the row blank -->
+                        </div>
+
+                        <!-- Name and Gender Row -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="firstname" class="form-label">First Name <span style="color: red;">*</span></label>
+                                <input type="text" id="firstname" class="form-control" required maxlength="10">
+                            </div>
+                            <div class="col-4">
+                                <label for="lastname" class="form-label">Last Name <span style="color: red;">*</span></label>
+                                <input type="text" id="lastname" class="form-control" required maxlength="15">
+                            </div>
+                            <div class="col-4">
+                                <label for="gender" class="form-label">Gender</label>
+                                <select class="form-select" id="gender">
+                                    <option value="">Select</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information Row -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="Email" maxlength="30">
+                            </div>
+                            <div class="col-4">
+                                <label for="mobile" class="form-label">Mobile Number</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+91</span>
+                                    <input type="tel" class="form-control" id="mobile" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+                                </div>
+                                <div class="form-text"></div>
+                            </div>
+                            <div class="col-4">
+                                <label for="verify-mobile" class="form-label">Verify Mobile Number <span style="color: red;">*</span></label>
+                                <select class="form-select" id="verify-mobile" required>
+                                    <option value="">Select</option>
+                                    <option>Valid</option>
+                                    <option>Invalid</option>
+                                    <option>Not Picking</option>
+                                    <option>Switched Off</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Diagnosis Row -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label class="form-label">Diagnosis <span style="color: red;">*</span></label>
+                                <div id="diagnosis-container">
+                                    <div class="diagnosis-row mb-2">
+                                        <label>1.</label>
+                                        <textarea class="form-control diagnosis-box" rows="3" maxlength="500" placeholder="Enter diagnosis" required></textarea>
+                                    </div>
+                                    <div class="diagnosis-row mb-2">
+                                        <label>2.</label>
+                                        <textarea class="form-control diagnosis-box" rows="3" maxlength="500" placeholder="Enter diagnosis" required></textarea>
+                                    </div>
+                                    <div class="diagnosis-row mb-2">
+                                        <label>3.</label>
+                                        <textarea class="form-control diagnosis-box" rows="3" maxlength="500" placeholder="Enter diagnosis" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Consultant, Ward, and Bed Row -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="consultant" class="form-label">Consultant</label>
+                                <select class="form-select" id="consultant">
+                                    <option value="">Select</option>
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="ward" class="form-label">Ward</label>
+                                <select class="form-select" id="ward">
+                                    <option value="">Select</option>
+                                    <!-- Add ward options here -->
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="mobile" class="form-label">Bed</label>
+                                <input type="text" id="bed" class="form-control" maxlength="10">
+                            </div>
+                        </div>
+
+                        <!-- Relative1 Information Row -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="relative1-mobile" class="form-label">Relative1 Mobile No.</label>
+                                <input type="text" id="relative1-mobile" class="form-control" maxlength="10">
+                            </div>
+                            <div class="col-4">
+                                <label for="relation-patient1" class="form-label">Relation with Patient</label>
+                                <select class="form-select" id="relation-patient1">
+                                    <option value="">Select</option>
+                                    <!-- Add relation options here -->
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="verify-relative-mobile" class="form-label">Verify Relative Mobile No.</label>
+                                <select class="form-select" id="verify-relative-mobile">
+                                    <option value="">Select</option>
+                                    <option>Valid</option>
+                                    <option>Invalid</option>
+                                    <option>Not Picking</option>
+                                    <option>Switched Off</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Registration and Admit Date Row -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="registration-date" class="form-label">Registration Date <span style="color: red;">*</span></label>
+                                <input type="date" id="registration-date" class="form-control" required>
+                            </div>
+                            <div class="col-4">
+                                <label for="registration-time" class="form-label">Registration Time</label>
+                                <input type="time" id="registration-time" class="form-control">
+                            </div>
+                            <div class="col-4">
+                                <label for="admit-date" class="form-label">Admit Date</label>
+                                <input type="date" id="admit-date" class="form-control">
+                            </div>
+                        </div>
+
+                        <!-- Relative2 Information Row -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="relative2-mobile" class="form-label">Relative2 Mobile No.</label>
+                                <input type="text" id="relative2-mobile" class="form-control" maxlength="10">
+                            </div>
+                            <div class="col-4">
+                                <label for="relation-patient2" class="form-label">Relation with Patient</label>
+                                <select class="form-select" id="relation-patient2">
+                                    <option value="">Select</option>
+                                    <!-- Add relation options here -->
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="verify-mobile2" class="form-label">Verify Mobile No.</label>
+                                <select class="form-select" id="verify-mobile2">
+                                    <option value="">Select</option>
+                                    <option>Valid</option>
+                                    <option>Invalid</option>
+                                    <option>Not Picking</option>
+                                    <option>Switched Off</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Pincode, State, District, City Row -->
+                        <div class="row mb-3">
+                            <div class="col-3">
+                                <label for="pincode" class="form-label">Pincode</label>
+                                <input type="text" id="pincode" class="form-control" maxlength="7">
+                            </div>
+                            <div class="col-3">
+                                <label for="state" class="form-label">State</label>
+                                <input type="text" id="state" class="form-control" maxlength="40">
+                            </div>
+                            <div class="col-3">
+                                <label for="district" class="form-label">District</label>
+                                <select class="form-select" id="district">
+                                    <option value="">Select</option>
+                                    <!-- Add district options here -->
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" id="city" class="form-control" maxlength="30">
+                            </div>
+                        </div>
+
+                        <!-- Address Row -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="address" class="form-label">Address</label>
+                                <textarea id="address" class="form-control" rows="3" maxlength="500"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Add to Whatsapp Row -->
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <label for="add-to-whatsapp" class="form-label">Add to Whatsapp</label>
+                                <select class="form-select" id="add-to-whatsapp">
+                                    <option value="">Select</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- New Section: Cancer Type -->
+                        <div class="row mt-5 mb-4">
+                            <div class="col-12">
+                                <h2 class="header-title">Cancer Type</h2>
+                            </div>
+                        </div>
+
+                        <!-- Cancer Type (Provisional) Row -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="cancer-type-provisional" class="form-label">Cancer Type (Provisional)</label>
+                                <select class="form-select" id="cancer-type-provisional">
+                                    <option value="">Select Cancer Type (Provisional)</option>
+                                    <!-- Add provisional cancer type options here -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Specify (Provisional) Row -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="specify-provisional" class="form-label">Specify (Provisional)</label>
+                                <input type="text" id="specify-provisional" class="form-control">
+                            </div>
+                        </div>
+
+                        <!-- Comment Row -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="comment" class="form-label">Comment</label>
+                                <textarea id="comment" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Save Button -->
+                        <div class="row mt-4">
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-sm px-2">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let diagnosisCount = 3;
+    document.getElementById('add-diagnosis-btn').addEventListener('click', function() {
+        diagnosisCount++;
+        const diagnosisContainer = document.getElementById('diagnosis-container');
+        const newDiagnosisRow = document.createElement('div');
+        newDiagnosisRow.classList.add('diagnosis-row', 'mb-2');
+        
+        const label = document.createElement('label');
+        label.textContent = diagnosisCount + '.';
+
+        const textarea = document.createElement('textarea');
+        textarea.classList.add('form-control', 'diagnosis-box');
+        textarea.rows = 3;
+        textarea.maxLength = 500;
+        textarea.placeholder = "Enter diagnosis";
+        textarea.required = true;
+
+        newDiagnosisRow.appendChild(label);
+        newDiagnosisRow.appendChild(textarea);
+        diagnosisContainer.appendChild(newDiagnosisRow);
+    });
+</script>
+
+<style>
+    .diagnosis-row {
+        display: flex;
+        align-items: start;
+    }
+    .diagnosis-row label {
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+    .diagnosis-box {
+        flex-grow: 1;
+    }
+    .btn-purple {
+        background-color: purple;
+        color: white;
+        padding: 10px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+    }
+    .btn-purple:hover {
+        background-color: #8e44ad;
+    }
+</style>

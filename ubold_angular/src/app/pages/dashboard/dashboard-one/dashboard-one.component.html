@@ -1,0 +1,252 @@
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <div class="page-title-right">
+                <form class="d-flex align-items-center mb-3">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="datepicker" id="dash-datepicker" class="form-control border"
+                            [(ngModel)]="date" ngbDatepicker #datepicker="ngbDatepicker" (click)="datepicker.toggle()"
+                            autoClose="'outside'">
+
+                        <span class="input-group-text bg-blue border-blue text-white">
+                            <i class="mdi mdi-calendar-range"></i>
+                        </span>
+                    </div>
+                    <a href="javascript: void(0);" class="btn btn-blue btn-sm ms-2">
+                        <i class="mdi mdi-autorenew"></i>
+                    </a>
+                    <a href="javascript: void(0);" class="btn btn-blue btn-sm ms-1">
+                        <i class="mdi mdi-filter-variant"></i>
+                    </a>
+                </form>
+            </div>
+            <h4 class="page-title" i18n>Dashboard</h4>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-md-6 col-xl-3" *ngFor="let item of statisticsCardData">
+        <app-widget-statistics-card1 [statisticsCardData]="item"></app-widget-statistics-card1>
+    </div> <!-- end col-->
+</div>
+<!-- end row-->
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end d-flex align-items-center">
+                    <!-- Calendar Dropdown -->
+                    <div class="me-2">
+                        <button class="btn btn-light btn-sm" (click)="toggleDateFilter()">
+                            <i class="mdi mdi-calendar"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Three dots menu -->
+                    <div ngbDropdown>
+                        <a href="javascript:void(0);" class="arrow-none card-drop" ngbDropdownToggle>
+                            <i class="mdi mdi-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu-end" ngbDropdownMenu>
+                            <!-- item-->
+                            <a href="javascript:void(0);" ngbDropdownItem i18n>Sales Report</a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" ngbDropdownItem i18n>Export Report</a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" ngbDropdownItem i18n>Profit</a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" ngbDropdownItem i18n>Action</a>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="header-title mb-0" i18n>Reports</h4>
+
+                <!-- Date Range Display and Apply Button -->
+                <div *ngIf="showDateFilter" class="mt-2 mb-3">
+                    <div ngbDropdown class="mb-2">
+                        <button class="btn btn-light btn-sm" ngbDropdownToggle>
+                            {{ selectedOption || 'Select date range' }}
+                        </button>
+                        <div ngbDropdownMenu>
+                            <button ngbDropdownItem (click)="filterByDate('last7days')" [class.active]="selectedOption === 'last7days'">Last 7 days</button>
+                            <button ngbDropdownItem (click)="filterByDate('thisMonth')" [class.active]="selectedOption === 'thisMonth'">This month</button>
+                            <button ngbDropdownItem (click)="filterByDate('lastMonth')" [class.active]="selectedOption === 'lastMonth'">Last month</button>
+                            <button ngbDropdownItem (click)="filterByDate('last2Months')" [class.active]="selectedOption === 'last2Months'">Last 2 months</button>
+                            <button ngbDropdownItem (click)="filterByDate('custom')" [class.active]="selectedOption === 'custom'">Custom date</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="startDate">Start Date</label>
+                            <input type="date" id="startDate" class="form-control" [(ngModel)]="customStartDate">
+                        </div>
+                        <div class="col-6">
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate" class="form-control" [(ngModel)]="customEndDate">
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-primary mt-2" (click)="applyDateFilter()">Apply</button>
+                </div>
+
+                <div class="widget-chart text-center" dir="ltr">
+
+                    <div id="total-revenue" class="mt-0">
+                        <apx-chart class="apex-charts" [series]="revenuChart.series!" [chart]="revenuChart.chart!"
+                            [plotOptions]="revenuChart.plotOptions!" [colors]="revenuChart.colors!"
+                            [labels]="revenuChart.labels!"></apx-chart>
+                    </div>
+
+                    <h5 class="text-muted mt-0" i18n>Total Patients Admitted Today</h5>
+                    <h2>17</h2>
+
+                    <p class="text-muted w-75 mx-auto sp-line-2" i18n></p>
+
+                    <div class="row mt-3">
+                        <div class="col-4" *ngFor="let item of chartStatisticsData">
+                            <app-widget-chart-statistics [title]="item.title" [icon]="item.icon" [stats]="item.stats"
+                                [variant]="item.variant"></app-widget-chart-statistics>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div> <!-- end card -->
+    </div> <!-- end col-->
+
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body pb-2">
+                <div class="float-end d-none d-md-inline-block">
+                    <div class="btn-group mb-2">
+                        <button type="button" class="btn btn-xs" [ngClass]="{'btn-secondary': timeRange === 'today', 'btn-light': timeRange !== 'today'}" (click)="changeTimeRange('today')" i18n>Today</button>
+                        <button type="button" class="btn btn-xs" [ngClass]="{'btn-secondary': timeRange === 'weekly', 'btn-light': timeRange !== 'weekly'}" (click)="changeTimeRange('weekly')" i18n>Weekly</button>
+                        <button type="button" class="btn btn-xs" [ngClass]="{'btn-secondary': timeRange === 'monthly', 'btn-light': timeRange !== 'monthly'}" (click)="changeTimeRange('monthly')" i18n>Monthly</button>
+                    </div>
+                </div>
+
+                <h4 class="header-title mb-3" i18n>Analytics</h4>
+
+                <div dir="ltr">
+                    <div id="sales-analytics" class="mt-4" style="height: 378px;">
+                     <!--   <apx-chart
+                            [series]="salesAnalyticsChart.series!"
+                            [chart]="salesAnalyticsChart.chart!"
+                            [xaxis]="salesAnalyticsChart.xaxis!"
+                            [stroke]="salesAnalyticsChart.stroke!"
+                            [colors]="salesAnalyticsChart.colors!"
+                            [dataLabels]="salesAnalyticsChart.dataLabels!"
+                            [legend]="salesAnalyticsChart.legend!"
+                                [grid]="salesAnalyticsChart.grid!"
+                            [fill]="salesAnalyticsChart.fill!" 
+                            [yaxis]="salesAnalyticsChart.yaxis!"
+                        ></apx-chart>-->
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end card -->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="header-title mb-0" i18n>Patients Data</h4>
+                    <div class="d-flex align-items-center">
+                        <div class="search-container me-2">
+                            <input type="text" id="patientSearchInput" class="search-input" placeholder="Search ..." 
+                                   (input)="onSearch($event)">
+                        </div>
+                        
+                        <div ngbDropdown>
+                            <a href="javascript:void(0);" class="arrow-none card-drop" ngbDropdownToggle>
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </a>
+                            <!-- ... existing dropdown menu items ... -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-borderless table-nowrap table-hover table-centered m-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="text-center" style="width: 5%;" i18n>S.No</th>
+                                <th class="text-center" style="width: 20%; cursor: pointer;" (click)="sortData('name')" i18n>
+                                    Name
+                                    <i class="fas" [ngClass]="getSortIcon('name')"></i>
+                                </th>
+                                <th class="text-center" style="width: 15%; cursor: pointer;" (click)="sortData('dob')" i18n>
+                                    DOB
+                                    <i class="fas" [ngClass]="getSortIcon('dob')"></i>
+                                </th>
+                                <th class="text-center" style="width: 15%; cursor: pointer;" (click)="sortData('admitDate')" i18n>
+                                    Admit Date
+                                    <i class="fas" [ngClass]="getSortIcon('admitDate')"></i>
+                                </th>
+                                <th class="text-center" style="width: 15%;" i18n>Surgery Done</th>
+                                <th class="text-center" style="width: 15%;" i18n>Status</th>
+                                <th class="text-center" style="width: 15%;" i18n>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let record of filteredPatientsData; let i = index">
+                                <td class="text-center">{{ i + 1 }}</td>
+                                <td class="text-center">{{ record.name }}</td>
+                                <td class="text-center">{{ record.dob | date:'MMM dd, y' }}</td>
+                                <td class="text-center">{{ record.admitDate | date:'MMM dd, y' }}</td>
+                                <td class="text-center">{{ record.surgeryDone ? 'Yes' : 'No' }}</td>
+                                <td class="text-center">
+                                    <span class="badge"
+                                        [ngClass]="{
+                                            'bg-soft-success text-success': record.status === 'Discharged',
+                                            'bg-soft-warning text-warning': record.status === 'Transferred',
+                                            'bg-soft-danger text-danger': record.status === 'Death'
+                                        }">
+                                        {{record.status}}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="javascript: void(0);" class="btn btn-xs btn-light"><i
+                                            class="mdi mdi-pencil"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> <!-- end .table-responsive-->
+            </div>
+        </div> <!-- end card-->
+    </div> <!-- end col -->
+</div>
+<!-- end row -->
+
+<!-- Custom Date Range Modal -->
+<ng-template #customDateModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Select Custom Date Range</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-6">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" class="form-control" [(ngModel)]="customStartDate">
+            </div>
+            <div class="col-6">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" class="form-control" [(ngModel)]="customEndDate">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="applyCustomDateFilter()">Apply</button>
+    </div>
+</ng-template>

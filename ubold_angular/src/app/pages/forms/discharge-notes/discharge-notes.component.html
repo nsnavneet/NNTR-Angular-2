@@ -1,0 +1,286 @@
+<div class="container-fluid">
+    <div class="row align-items-center mb-4">
+        <div class="col-12">
+            <div class="page-title-box rounded p-3">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h4 class="page-title mb-0" style="color: white;">Discharge Notes</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter UHID" formControlName="uhid">
+                            <button class="btn btn-outline-light" type="button">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form [formGroup]="dischargeNotesForm" (ngSubmit)="onSubmit()">
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <label for="dischargeType" class="form-label fw-bold">Discharge Type</label>
+                                <select id="dischargeType" formControlName="dischargeType" class="form-select form-select-lg" (change)="onDischargeTypeChange()">
+                                    <option value="">Choose an option</option>
+                                    <option value="transferred">Transferred</option>
+                                    <option value="death">Death</option>
+                                    <option value="discharge">Discharge</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 d-flex align-items-end" *ngIf="dischargeNotesForm.get('dischargeType')?.value === 'death'">
+                                <button type="button" class="btn btn-primary me-2 btn-lg custom-btn" (click)="uploadDeathSummary()">Upload Death Summary</button>
+                                <button type="button" class="btn btn-secondary btn-lg custom-btn" (click)="viewDeathSummary()">View Death Summary</button>
+                            </div>
+                            <div class="col-md-8 d-flex align-items-end" *ngIf="dischargeNotesForm.get('dischargeType')?.value === 'discharge'">
+                                <button type="button" class="btn btn-primary me-2 btn-lg custom-btn" (click)="uploadDischargeSummary()">Upload Discharge Summary</button>
+                                <button type="button" class="btn btn-secondary btn-lg custom-btn" (click)="viewDischargeSummary()">View Discharge Summary</button>
+                            </div>
+                        </div>
+
+                        <div *ngIf="dischargeNotesForm.get('dischargeType')?.value === 'transferred'" class="row mb-4">
+                            <div class="col-md-4">
+                                <label for="transferDate" class="form-label fw-bold">Date of Transfer</label>
+                                <input type="date" id="transferDate" formControlName="transferDate" class="form-control form-control-lg">
+                            </div>
+                        </div>
+
+                        <div [@slideInOut] *ngIf="dischargeNotesForm.get('dischargeType')?.value === 'death'" class="mt-4">
+                            <h5>Death Form</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="deathDate" class="form-label">Date of Death</label>
+                                    <input type="date" id="deathDate" formControlName="deathDate" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="consultant" class="form-label">Consultant</label>
+                                    <input type="text" id="consultant" formControlName="consultant" class="form-control">
+                                </div>
+                            </div>
+                            <hr class="border-dark">
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <label for="department" class="form-label">Department</label>
+                                    <input type="text" id="department" formControlName="department" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="unit" class="form-label">Unit</label>
+                                    <input type="text" id="unit" formControlName="unit" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ward" class="form-label">Ward</label>
+                                    <input type="text" id="ward" formControlName="ward" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">MLC</label>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="mlcYes" value="yes" formControlName="mlc">
+                                            <label class="form-check-label" for="mlcYes">Yes</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" id="mlcNo" value="no" formControlName="mlc">
+                                            <label class="form-check-label" for="mlcNo">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="border-dark">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="immediateCause" class="form-label">a) Immediate cause</label>
+                                    <input type="text" id="immediateCause" formControlName="immediateCause" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="immediateInterval" class="form-label">Approximate Interval</label>
+                                    <input type="text" id="immediateInterval" formControlName="immediateInterval" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="antecedentCause" class="form-label">b) Antecedent cause</label>
+                                    <input type="text" id="antecedentCause" formControlName="antecedentCause" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="antecedentInterval" class="form-label">Approximate Interval</label>
+                                    <input type="text" id="antecedentInterval" formControlName="antecedentInterval" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="otherCondition" class="form-label">Other Significant Condition</label>
+                                    <input type="text" id="otherCondition" formControlName="otherCondition" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="otherInterval" class="form-label">Approximate Interval</label>
+                                    <input type="text" id="otherInterval" formControlName="otherInterval" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-9">
+                                    <label for="injuryOccurrence" class="form-label">How did Injury Occur?</label>
+                                    <textarea id="injuryOccurrence" formControlName="injuryOccurrence" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="mannerOfDeath" class="form-label">Manner of Death</label>
+                                    <select id="mannerOfDeath" formControlName="mannerOfDeath" class="form-select">
+                                        <option value="">Select</option>
+                                        <option value="natural">Natural</option>
+                                        <option value="accident">Accident</option>
+                                        <option value="suicide">Suicide</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="placeOfDeath" class="form-label">Place of Death</label>
+                                    <select class="form-select" id="placeOfDeath" formControlName="placeOfDeath">
+                                        <option value="">Select Place</option>
+                                        <option value="hospital">Hospital</option>
+                                        <option value="house">House</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="informantName" class="form-label">Informant's Name</label>
+                                    <div class="input-group">
+                                        <select class="form-select" style="max-width: 80px;" formControlName="informantPrefix">
+                                            <option value="SR" selected>SR</option>
+                                            <option value="JR">JR</option>
+                                        </select>
+                                        <input type="text" id="informantName" formControlName="informantName" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <label for="smoking" class="form-label">Smoking</label>
+                                    <div class="input-group">
+                                        <input type="text" id="smoking" formControlName="smoking" class="form-control">
+                                        <select class="form-select" style="max-width: 80px;" formControlName="smokingKnown">
+                                            <option value="not-known" selected>Not Known</option>
+                                            <option value="known">Known</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="chewTobacco" class="form-label">Chew Tobacco</label>
+                                    <div class="input-group">
+                                        <input type="text" id="chewTobacco" formControlName="chewTobacco" class="form-control">
+                                        <select class="form-select" style="max-width: 80px;" formControlName="chewTobaccoKnown">
+                                            <option value="not-known" selected>Not Known</option>
+                                            <option value="known">Known</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="chewArecanut" class="form-label">Chew Arecanut</label>
+                                    <div class="input-group">
+                                        <input type="text" id="chewArecanut" formControlName="chewArecanut" class="form-control">
+                                        <select class="form-select" style="max-width: 80px;" formControlName="chewArecanutKnown">
+                                            <option value="not-known" selected>Not Known</option>
+                                            <option value="known">Known</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="drinkAlcohol" class="form-label">Drink Alcohol</label>
+                                    <div class="input-group">
+                                        <input type="text" id="drinkAlcohol" formControlName="drinkAlcohol" class="form-control">
+                                        <select class="form-select" style="max-width: 80px;" formControlName="drinkAlcoholKnown">
+                                            <option value="not-known" selected>Not Known</option>
+                                            <option value="known">Known</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Brought Dead</label>
+                                    <div class="form-check form-check-inline ms-2">
+                                        <input class="form-check-input" type="radio" id="broughtDeadYes" value="yes" formControlName="broughtDead">
+                                        <label class="form-check-label" for="broughtDeadYes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="broughtDeadNo" value="no" formControlName="broughtDead" checked>
+                                        <label class="form-check-label" for="broughtDeadNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">If deceased was a female, was pregnancy the death associated with?</label>
+                                    <div class="form-check form-check-inline ms-2">
+                                        <input class="form-check-input" type="radio" id="pregnancyAssociatedYes" value="yes" formControlName="pregnancyAssociated">
+                                        <label class="form-check-label" for="pregnancyAssociatedYes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="pregnancyAssociatedNo" value="no" formControlName="pregnancyAssociated" checked>
+                                        <label class="form-check-label" for="pregnancyAssociatedNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">If yes, was there a delivery?</label>
+                                    <div class="form-check form-check-inline ms-2">
+                                        <input class="form-check-input" type="radio" id="deliveryYes" value="yes" formControlName="delivery">
+                                        <label class="form-check-label" for="deliveryYes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="deliveryNo" value="no" formControlName="delivery" checked>
+                                        <label class="form-check-label" for="deliveryNo">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div [@slideInOut] *ngIf="dischargeNotesForm.get('dischargeType')?.value === 'discharge'" class="mt-4">
+                            <h5>Discharge Form</h5>
+                            <!-- Add discharge form fields here -->
+                            <div class="mb-3">
+                                <label for="dischargeDate" class="form-label">Date of Discharge</label>
+                                <input type="date" id="dischargeDate" formControlName="dischargeDate" class="form-control">
+                            </div>
+                            <!-- Add more discharge-related fields as needed -->
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-sm px-2">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Death Form Modal -->
+<ng-template #deathFormModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Death Form</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <!-- Death form fields will be added here -->
+        <p>Death form content will be added here.</p>
+    </div>
+</ng-template>
+
+<!-- Discharge Form Modal -->
+<ng-template #dischargeFormModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Discharge Form</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <!-- Discharge form fields will be added here -->
+        <p>Discharge form content will be added here.</p>
+    </div>
+</ng-template>

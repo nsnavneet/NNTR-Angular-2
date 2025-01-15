@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box rounded mb-4 p-3">
+                <h4 class="page-title mb-0" style="color: white;">Histopathology</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form [formGroup]="histopathologyForm" (ngSubmit)="onSubmit()">
+                        <!-- Markers and Results Section -->
+                        <div class="mb-4">
+                            <h5 class="text-primary mb-3">Markers and Results</h5>
+                            <div *ngFor="let _ of [1,2,3,4,5]; let i = index" class="row mb-3">
+                                <div class="col-md-4">
+                                    <label [for]="'marker' + i" class="form-label">Marker {{i + 1}}</label>
+                                    <input [id]="'marker' + i" [formControlName]="'marker' + i" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label [for]="'result' + i" class="form-label">Result {{i + 1}}</label>
+                                    <select [id]="'result' + i" [formControlName]="'result' + i" class="form-select">
+                                        <option value="">Select Result</option>
+                                        <option value="positive">Positive</option>
+                                        <option value="negative">Negative</option>
+                                        <option value="inconclusive">Inconclusive</option>
+                                        <option value="not_applicable">Not Applicable</option>
+                                        <option value="pending">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="report" class="form-label fw-bold">Report</label>
+                            <textarea id="report" formControlName="report" class="form-control" rows="5"></textarea>
+                        </div>
+
+                        <div class="text-center mb-4">
+                            <button type="submit" class="btn btn-primary btn-sm px-2">Save</button>
+                        </div>
+
+                        <!-- Cancer Type (final) Section -->
+                        <div class="mt-5 mb-5">
+                            <h5 class="text-primary mb-3">Cancer Type (final)</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="cancerType" class="form-label">Cancer Type</label>
+                                    <select id="cancerType" formControlName="cancerType" class="form-select">
+                                        <option value="">Select Cancer Type</option>
+                                        <option value="type1">Type 1</option>
+                                        <option value="type2">Type 2</option>
+                                        <option value="type3">Type 3</option>
+                                        <option value="type4">Type 4</option>
+                                        <option value="type5">Type 5</option>
+                                        <option value="type6">Type 6</option>
+                                        <option value="type7">Type 7</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="cancerDate" class="form-label">Date</label>
+                                    <input type="date" id="cancerDate" formControlName="cancerDate" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="cancerTime" class="form-label">Time</label>
+                                    <input type="time" id="cancerTime" formControlName="cancerTime" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label for="cancerComment" class="form-label">Comment</label>
+                                    <textarea id="cancerComment" formControlName="cancerComment" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary btn-sm px-2" (click)="saveCancerType()">Save</button>
+                            </div>
+                        </div>
+
+                        <!-- Biopsy Report Section -->
+                        <div class="mt-5">
+                            <h5 class="text-primary mb-3">Biopsy Report</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="biopsyReportType" class="form-label">Biopsy Report Type</label>
+                                    <select id="biopsyReportType" formControlName="biopsyReportType" class="form-select">
+                                        <option value="">Select Biopsy Report Type</option>
+                                        <option value="type1">Type 1</option>
+                                        <option value="type2">Type 2</option>
+                                        <option value="type3">Type 3</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="biopsyDate" class="form-label">Date</label>
+                                    <input type="date" id="biopsyDate" formControlName="biopsyDate" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="biopsyTime" class="form-label">Time</label>
+                                    <input type="time" id="biopsyTime" formControlName="biopsyTime" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-8">
+                                    <label for="biopsyFile" class="form-label">Choose File</label>
+                                    <input type="file" id="biopsyFile" (change)="onFileSelected($event)" class="form-control">
+                                </div>
+                                <div class="col-md-4 d-flex align-items-end">
+                                    <button type="button" class="btn btn-secondary" (click)="uploadFile()">Upload</button>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary btn-sm px-2">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
