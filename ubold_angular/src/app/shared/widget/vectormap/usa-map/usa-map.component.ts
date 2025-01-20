@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import 'jsvectormap';
-import 'jsvectormap/dist/maps/us-merc-en.js';
+import '../../../../../assets/jsvectormap/maps/us-merc-en.js';
 
 @Component({
   selector: 'app-widget-usa-map',

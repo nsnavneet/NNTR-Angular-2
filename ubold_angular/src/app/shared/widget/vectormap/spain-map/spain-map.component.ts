@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import 'jsvectormap';
-import 'jsvectormap/dist/maps/spain.js';
+import '../../../../../assets/jsvectormap/maps/spain.js';
 
 @Component({
   selector: 'app-widget-spain-map',

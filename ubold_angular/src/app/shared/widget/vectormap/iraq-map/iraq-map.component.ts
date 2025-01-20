@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import 'jsvectormap';
-import 'jsvectormap/dist/maps/iraq.js';
+import '../../../../../assets/jsvectormap/maps/iraq.js';
 
 @Component({
   selector: 'app-widget-iraq-map',

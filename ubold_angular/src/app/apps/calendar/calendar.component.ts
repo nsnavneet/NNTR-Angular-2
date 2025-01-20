@@ -50,14 +50,6 @@ export class CalendarComponent implements OnInit {
    */
   initCalendar(): void {
 
-    FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-      dayGridPlugin,
-      interactionPlugin,
-      bootstrapPlugin,
-      timeGridPlugin,
-      listPlugin
-    ]);
-
     // full calendar config
     this.calendarOptions = {
       themeSystem: 'bootstrap',
